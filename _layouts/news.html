@@ -1,0 +1,106 @@
+---
+layout: default
+---
+
+<div class="news-page">
+  <div class="container">
+    <h1 class="page-title">{{ page.title }}</h1>
+    
+    <div class="news-description">
+      <p>{{ page.description }}</p>
+    </div>
+
+    <div class="news-container">
+      <div id="nmc-news-loader" class="loader">
+        <div class="spinner"></div>
+        <p>Loading latest news from NMC...</p>
+      </div>
+      
+      <div id="nmc-news-list" class="news-list"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const newsContainer = document.getElementById('nmc-news-list');
+  const loader = document.getElementById('nmc-news-loader');
+  
+  // Function to format date
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  }
+
+  // Show loading indicator
+  loader.style.display = 'flex';
+  
+  // Use a proxy service since direct requests might be blocked by CORS
+  fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.nmc.org.in/all-news/'))
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Parse the HTML content
+      const parser = new DOMParser();
+      const htmlDoc = parser.parseFromString(data.contents, 'text/html');
+      
+      // Extract news items - adjust selectors based on NMC website structure
+      const newsItems = htmlDoc.querySelectorAll('.news-item, .news-list-item, article');
+      
+      if (newsItems.length === 0) {
+        throw new Error('No news items found. The website structure might have changed.');
+      }
+      
+      // Create news elements
+      newsItems.forEach(item => {
+        const title = item.querySelector('h2, h3, .title')?.textContent.trim() || 'Untitled News';
+        const dateElem = item.querySelector('.date, .published-date, time');
+        const date = dateElem ? formatDate(dateElem.textContent.trim() || dateElem.getAttribute('datetime')) : '';
+        const summary = item.querySelector('p, .summary, .excerpt')?.textContent.trim() || '';
+        const link = item.querySelector('a')?.href || '';
+        
+        // Create news card
+        const newsCard = document.createElement('div');
+        newsCard.className = 'news-card';
+        
+        // Fix the link URL if it's relative
+        let fixedLink = link;
+        if (link && !link.startsWith('http')) {
+          fixedLink = 'https://www.nmc.org.in' + (link.startsWith('/') ? '' : '/') + link;
+        }
+        
+        newsCard.innerHTML = `
+          <div class="news-date">${date}</div>
+          <h3 class="news-title">${title}</h3>
+          <p class="news-summary">${summary}</p>
+          ${fixedLink ? `<a href="${fixedLink}" target="_blank" class="news-link">Read More</a>` : ''}
+        `;
+        
+        newsContainer.appendChild(newsCard);
+      });
+      
+      // If no news items were processed, show a message
+      if (newsContainer.children.length === 0) {
+        newsContainer.innerHTML = '<p class="no-news">Could not retrieve news from NMC website. Please check back later.</p>';
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching news:', error);
+      newsContainer.innerHTML = `
+        <div class="news-error">
+          <p>Unable to fetch news from the NMC website.</p>
+          <p>Please visit <a href="https://www.nmc.org.in/all-news/" target="_blank">NMC News</a> directly.</p>
+          <p class="error-details">Error: ${error.message}</p>
+        </div>
+      `;
+    })
+    .finally(() => {
+      // Hide loading indicator
+      loader.style.display = 'none';
+    });
+});
+</script>

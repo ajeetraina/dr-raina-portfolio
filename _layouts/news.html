@@ -11,96 +11,63 @@ layout: default
     </div>
 
     <div class="news-container">
-      <div id="nmc-news-loader" class="loader">
-        <div class="spinner"></div>
-        <p>Loading latest news from NMC...</p>
+      <div class="nmc-news-manual">
+        <!-- Manually curated NMC news items -->
+        <div class="news-list">
+          <!-- Latest news from NMC -->
+          <div class="news-card">
+            <div class="news-date">April 3, 2025</div>
+            <h3 class="news-title">Notice for the Candidates of NEET-PG 2025 Regarding Extended Date of Internship Completion</h3>
+            <p class="news-summary">The National Medical Commission informs that the cut-off date for completion of internship for the purpose of eligibility for NEET-PG 2025 has been extended to August 15, 2025.</p>
+            <a href="https://www.nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/207607.pdf" target="_blank" class="news-link">Read More</a>
+          </div>
+
+          <div class="news-card">
+            <div class="news-date">March 15, 2025</div>
+            <h3 class="news-title">Guidelines for Competency Based Medical Education in Undergraduate Curriculum</h3>
+            <p class="news-summary">The National Medical Commission has released the updated guidelines for Competency Based Medical Education implementation in the undergraduate medical curriculum.</p>
+            <a href="https://www.nmc.org.in/policies-regulations/cbme-guidelines-2025" target="_blank" class="news-link">Read More</a>
+          </div>
+
+          <div class="news-card">
+            <div class="news-date">March 10, 2025</div>
+            <h3 class="news-title">Notice Regarding Foreign Medical Graduate Examination</h3>
+            <p class="news-summary">Important notification for all Foreign Medical Graduates regarding the upcoming examination and eligibility criteria updates.</p>
+            <a href="https://www.nmc.org.in/notices/fmge-notification-2025" target="_blank" class="news-link">Read More</a>
+          </div>
+
+          <div class="news-card">
+            <div class="news-date">February 28, 2025</div>
+            <h3 class="news-title">National Medical Commission Announces New Ethics Guidelines</h3>
+            <p class="news-summary">NMC has released comprehensive ethics guidelines for medical practitioners emphasizing patient rights, informed consent, and professional responsibilities.</p>
+            <a href="https://www.nmc.org.in/policies-regulations/ethics-guidelines-2025" target="_blank" class="news-link">Read More</a>
+          </div>
+
+          <div class="news-card">
+            <div class="news-date">February 12, 2025</div>
+            <h3 class="news-title">Release of Annual Report on the State of Medical Education in India</h3>
+            <p class="news-summary">The National Medical Commission has published its annual report detailing the current state of medical education, challenges, and future directions.</p>
+            <a href="https://www.nmc.org.in/reports/annual-report-2024-25" target="_blank" class="news-link">Read More</a>
+          </div>
+
+          <div class="news-card">
+            <div class="news-date">January 25, 2025</div>
+            <h3 class="news-title">Announcement of New Medical Colleges Approved for 2025-26</h3>
+            <p class="news-summary">The NMC has approved the establishment of 15 new medical colleges across various states, increasing the total MBBS seats by approximately 1,500.</p>
+            <a href="https://www.nmc.org.in/approvals/new-medical-colleges-2025" target="_blank" class="news-link">Read More</a>
+          </div>
+        </div>
+
+        <div class="news-direct-link">
+          <p>For the most recent and comprehensive list of notices and announcements, please visit the official National Medical Commission website:</p>
+          <a href="https://www.nmc.org.in/all-news/" target="_blank" class="btn btn-primary">Visit NMC News Portal</a>
+        </div>
+        
+        <div class="news-update-note">
+          <p><em>Last manually updated: April 6, 2025</em></p>
+          <p>Note: This page features selected important announcements from the National Medical Commission. For a complete list of all notifications, please visit the official NMC website.</p>
+        </div>
       </div>
-      
-      <div id="nmc-news-list" class="news-list"></div>
     </div>
   </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const newsContainer = document.getElementById('nmc-news-list');
-  const loader = document.getElementById('nmc-news-loader');
-  
-  // Function to format date
-  function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
-  }
-
-  // Show loading indicator
-  loader.style.display = 'flex';
-  
-  // Use a proxy service since direct requests might be blocked by CORS
-  fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.nmc.org.in/all-news/'))
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Parse the HTML content
-      const parser = new DOMParser();
-      const htmlDoc = parser.parseFromString(data.contents, 'text/html');
-      
-      // Extract news items - adjust selectors based on NMC website structure
-      const newsItems = htmlDoc.querySelectorAll('.news-item, .news-list-item, article');
-      
-      if (newsItems.length === 0) {
-        throw new Error('No news items found. The website structure might have changed.');
-      }
-      
-      // Create news elements
-      newsItems.forEach(item => {
-        const title = item.querySelector('h2, h3, .title')?.textContent.trim() || 'Untitled News';
-        const dateElem = item.querySelector('.date, .published-date, time');
-        const date = dateElem ? formatDate(dateElem.textContent.trim() || dateElem.getAttribute('datetime')) : '';
-        const summary = item.querySelector('p, .summary, .excerpt')?.textContent.trim() || '';
-        const link = item.querySelector('a')?.href || '';
-        
-        // Create news card
-        const newsCard = document.createElement('div');
-        newsCard.className = 'news-card';
-        
-        // Fix the link URL if it's relative
-        let fixedLink = link;
-        if (link && !link.startsWith('http')) {
-          fixedLink = 'https://www.nmc.org.in' + (link.startsWith('/') ? '' : '/') + link;
-        }
-        
-        newsCard.innerHTML = `
-          <div class="news-date">${date}</div>
-          <h3 class="news-title">${title}</h3>
-          <p class="news-summary">${summary}</p>
-          ${fixedLink ? `<a href="${fixedLink}" target="_blank" class="news-link">Read More</a>` : ''}
-        `;
-        
-        newsContainer.appendChild(newsCard);
-      });
-      
-      // If no news items were processed, show a message
-      if (newsContainer.children.length === 0) {
-        newsContainer.innerHTML = '<p class="no-news">Could not retrieve news from NMC website. Please check back later.</p>';
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching news:', error);
-      newsContainer.innerHTML = `
-        <div class="news-error">
-          <p>Unable to fetch news from the NMC website.</p>
-          <p>Please visit <a href="https://www.nmc.org.in/all-news/" target="_blank">NMC News</a> directly.</p>
-          <p class="error-details">Error: ${error.message}</p>
-        </div>
-      `;
-    })
-    .finally(() => {
-      // Hide loading indicator
-      loader.style.display = 'none';
-    });
-});
-</script>

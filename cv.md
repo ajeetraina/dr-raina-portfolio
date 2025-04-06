@@ -20,8 +20,7 @@ permalink: /cv/
         <p><strong>Dr. Rangeel Singh Raina</strong><br>
         Principal, Government Medical College, Haridwar, Uttarakhand<br>
         Professor, Department of Pharmacology<br>
-        Email: <a href="mailto:rainarangeel@gmail.com">rainarangeel@gmail.com</a><br>
-        Mobile: 09568127670 (Dehradun), 09419236569 (Jammu)</p>
+        Email: <a href="mailto:rainarangeel@gmail.com">rainarangeel@gmail.com</a></p>
       </div>
     </section>
 
@@ -198,19 +197,6 @@ permalink: /cv/
       </div>
     </section>
 
-    <section class="cv-section">
-      <h2 class="cv-section-title">Personal Details</h2>
-      <div class="cv-item">
-        <ul>
-          <li><strong>Name:</strong> Rangeel Singh Raina</li>
-          <li><strong>Father's Name:</strong> Late S. Gurbax Singh</li>
-          <li><strong>Date of Birth:</strong> 31/05/1972</li>
-          <li><strong>Languages Known:</strong> English, Hindi and Punjabi</li>
-          <li><strong>Permanent Address:</strong> #75 Sec 6 Lane 7 Nanak Nagar, Jammu (J&K)-180004</li>
-        </ul>
-      </div>
-    </section>
-
     <div class="cv-signature">
       <p>Date: 07-04-2025</p>
       <p>Dr. Rangeel Singh Raina</p>
@@ -223,6 +209,7 @@ permalink: /cv/
   .cv-page {
     margin-top: 80px;
     padding: 4rem 0;
+    background-color: var(--light-color);
   }
   
   .page-title {
@@ -230,11 +217,29 @@ permalink: /cv/
     font-size: 2.5rem;
     margin-bottom: 2.5rem;
     color: var(--primary-color);
+    position: relative;
+  }
+  
+  .page-title::after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    margin: 1rem auto 0;
+    border-radius: 2px;
   }
   
   .cv-download-section {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .download-btn {
@@ -246,6 +251,10 @@ permalink: /cv/
     justify-content: center;
     gap: 0.5rem;
     transition: all 0.3s ease;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
   }
   
   .download-btn i {
@@ -255,22 +264,40 @@ permalink: /cv/
   .download-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-color);
   }
   
   .cv-section {
     margin-bottom: 2.5rem;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   }
   
   .cv-section-title {
     font-size: 1.8rem;
-    border-bottom: 2px solid var(--primary-color);
+    color: var(--primary-color);
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
-    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+  }
+  
+  .cv-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary-color), transparent);
   }
   
   .cv-item {
     margin-bottom: 1.5rem;
+    border-left: 3px solid var(--secondary-color);
+    padding-left: 1.5rem;
   }
   
   .cv-item-title {

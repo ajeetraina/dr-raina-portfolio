@@ -6,8 +6,8 @@ description: >-
   Principal and Professor at Government Medical College, Haridwar, specializing in
   Pharmacology, Patient Safety, and Drug Information. Member of Executive Council of
   National Association of Pharmacology and Therapeutics.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/dr-raina-portfolio" # the subpath of your site, e.g. /blog
+url: "https://ajeetraina.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
 github_username:  
 linkedin_username: rangeel-raina

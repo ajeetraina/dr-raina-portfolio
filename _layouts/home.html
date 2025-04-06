@@ -38,7 +38,7 @@ layout: default
         <div class="about-text">
           <p>{{ site.description }}</p>
           <p>Dr. Raina is an accomplished Principal and Professor (Pharmacology) at Government Medical College, Haridwar. He serves on the Executive Council of the National Association of Pharmacology and Therapeutics and is a member of the Governing Body of State Medical Council, Uttarakhand. His expertise spans Pharmacology, Patient Safety, and Clinical Pharmacy.</p>
-          <p>As the Founder Coordinator of the Adverse Drug Monitoring Centre at GDMC Dehradun and Founder Member Secretary of Institutional Ethics Committees, Dr. Raina has made significant contributions to medical education and research. He was recognized as the Best Teacher at Government Doon Medical College, Dehradun in 2017.</p>
+          <p>With over 15 years of experience in medical education and research, Dr. Raina has been instrumental in developing pharmacology curricula and implementing innovative teaching methodologies. As the Founder Coordinator of the Adverse Drug Monitoring Centre at GDMC Dehradun and Founder Member Secretary of Institutional Ethics Committees, Dr. Raina has made significant contributions to medical education and research. He was recognized as the Best Teacher at Government Doon Medical College, Dehradun in 2017.</p>
           <div class="stats">
             <div class="stat-item">
               <span class="stat-number">30+</span>
@@ -134,24 +134,39 @@ layout: default
           </div>
           <div class="social-links">
             {% if site.linkedin_username %}
-            <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener noreferrer" title="LinkedIn">
               <i class="fab fa-linkedin"></i>
             </a>
             {% endif %}
             {% if site.research_gate %}
-            <a href="https://www.researchgate.net/{{ site.research_gate }}" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.researchgate.net/{{ site.research_gate }}" target="_blank" rel="noopener noreferrer" title="ResearchGate">
               <i class="fab fa-researchgate"></i>
             </a>
             {% endif %}
+            {% if site.google_scholar %}
+            <a href="https://scholar.google.com/citations?user={{ site.google_scholar }}" target="_blank" rel="noopener noreferrer" title="Google Scholar">
+              <i class="fas fa-graduation-cap"></i>
+            </a>
+            {% endif %}
+            {% if site.orcid %}
+            <a href="https://orcid.org/{{ site.orcid }}" target="_blank" rel="noopener noreferrer" title="ORCID">
+              <i class="fab fa-orcid"></i>
+            </a>
+            {% endif %}
+            {% if site.pubmed %}
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term={{ site.pubmed }}" target="_blank" rel="noopener noreferrer" title="PubMed">
+              <i class="fas fa-book-medical"></i>
+            </a>
+            {% endif %}
             {% if site.twitter_username %}
-            <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noopener noreferrer">
+            <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noopener noreferrer" title="Twitter">
               <i class="fab fa-twitter"></i>
             </a>
             {% endif %}
           </div>
         </div>
         <div class="contact-form">
-          <form action="https://formspree.io/f/your-form-id" method="POST">
+          <form action="https://formspree.io/f/xpznezoe" method="POST">
             <div class="form-group">
               <label for="name">Name</label>
               <input type="text" id="name" name="name" required>

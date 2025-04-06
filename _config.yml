@@ -8,10 +8,14 @@ description: >-
   National Association of Pharmacology and Therapeutics.
 baseurl: "" # empty baseurl for custom domain
 url: "https://drrangeel.kubefoundation.com" # your custom domain
+# Social profiles
 twitter_username: 
 github_username:  
-linkedin_username: rangeel-raina
-research_gate: profile/Rangeel-Raina
+linkedin_username: rangeel-singh-041999a5
+research_gate: profile/Rangeel_Singh
+google_scholar: 
+orcid: 
+pubmed: 
 
 # Build settings
 markdown: kramdown
